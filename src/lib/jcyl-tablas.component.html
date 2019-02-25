@@ -1,0 +1,62 @@
+<ng-container *ngIf="config">
+    <table *ngIf="config.isTypeA && !config.isTypeB && !config.isTypeC" class="tabla"
+        [summary]="config.summary ? config.summary : ''">
+        <caption *ngIf="config.caption">{{config.caption}}</caption>
+        <tbody>
+            <tr *ngIf="config.cabecera" class="separacion-cabecera">
+                <td></td>
+                <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
+            </tr>
+            <tr *ngFor="let row of config.rows; let i = index" [class.destacada]="row.destacada">
+                <ng-container *ngIf="row.fields[0].rowspan; else normal">
+                    <ng-container *ngFor="let field of row.fields; let f = index">
+                        <th *ngIf="f == 0; else resto" [attr.rowspan]="row.fields[0].rowspan">{{row.fields[0].content}}</th>
+                        <ng-template #resto>
+                            <td>
+                                {{field.content}}
+                            </td>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+                <ng-template #normal>
+                    <td *ngFor="let field of row.fields">
+                        {{field.content}}
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="config.isTypeB && !config.isTypeA && !config.isTypeC" class="tabla"
+        [summary]="config.summary ? config.summary : ''">
+        <caption *ngIf="config.caption">{{config.caption}}</caption>
+        <tbody>
+            <tr *ngIf="config.cabecera" class="separacion-cabecera">
+                <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
+            </tr>
+            <tr *ngFor="let row of config.rows" [class.destacada]="row.destacada">
+                <td *ngFor="let field of row.fields">
+                    {{field.content}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="config.isTypeC && !config.isTypeA && !config.isTypeB" class="tabla"
+        [summary]="config.summary ? config.summary : ''">
+        <caption *ngIf="config.caption">{{config.caption}}</caption>
+        <tbody>
+            <tr *ngIf="config.cabecera" class="separacion-cabecera">
+                <th scope="col" [attr.colspan]="config.rows[config.rows.length - 1].fields.length">
+                    {{config.cabecera[0]}}</th>
+            </tr>
+            <tr *ngFor="let row of config.rows" [class.destacada]="row.destacada">
+                <td *ngFor="let field of row.fields">
+                    {{field.content}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</ng-container>
