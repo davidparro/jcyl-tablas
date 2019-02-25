@@ -4,5 +4,4 @@ Esta librería está basada en la [guía de estilos de la Junta de Castilla y Le
 
 Con este componente podemos generar tablas de los tipos A,B y C.
 
-Demo del componente:
-<iframe src="https://stackblitz.com/edit/angular-p96rqn?embed=1&file=src/app/app.component.ts"></iframe>
+Demo online: [StackBlitz](https://stackblitz.com/edit/angular-p96rqn)
