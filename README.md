@@ -6,14 +6,14 @@ Con este componente podemos generar tablas de los tipos A,B y C.
 
 Demo online: [StackBlitz](https://stackblitz.com/edit/angular-p96rqn)
 
-####Instalación
+#Instalación
 
-####NPM
+##NPM
 ```shell
 npm install jcyl-tablas
 ```
 
-####Importación de dependencias
+##Importación de dependencias
 
 ```js
 
