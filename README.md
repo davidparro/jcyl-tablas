@@ -5,3 +5,30 @@ Esta librería está basada en la [guía de estilos de la Junta de Castilla y Le
 Con este componente podemos generar tablas de los tipos A,B y C.
 
 Demo online: [StackBlitz](https://stackblitz.com/edit/angular-p96rqn)
+
+####Instalación
+
+####NPM
+```shell
+npm install jcyl-tablas
+```
+
+####Importación de dependencias
+
+```js
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { JcylTablasModule } from 'jcyl-tablas';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+        BrowserModule,
+        AppRoutingModule,
+        JcylTablasModule
+        ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
