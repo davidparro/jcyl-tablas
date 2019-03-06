@@ -56,9 +56,7 @@
                     <span *ngIf="!field.isButton">
                         {{field.content}}
                     </span>
-                    <button (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" class="boton">
-                        {{field.content}}
-                    </button>
+                    <input [value]="field.content" type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" class="boton"/>
                 </td>
             </tr>
         </tbody>
