@@ -6,6 +6,7 @@ export class Tabla {
     isTypeB: boolean;
     isTypeC: boolean;
     rows: Row[];
+    paginado: Paginado;
 
     constructor(props) {
         Object.assign(this, props);
@@ -25,6 +26,17 @@ export class Field {
     rowspan: number;
     content: string;
 
+    constructor(props) {
+        Object.assign(this, props);
+    }
+}
+
+export class Paginado {
+    limit: number;
+    page: number;
+    start: number;
+    end: number;
+    count: number;
     constructor(props) {
         Object.assign(this, props);
     }

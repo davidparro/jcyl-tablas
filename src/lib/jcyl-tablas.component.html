@@ -7,10 +7,11 @@
                 <td></td>
                 <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
             </tr>
-            <tr *ngFor="let row of config.rows; let i = index" [class.destacada]="row.destacada">
+            <tr *ngFor="let row of getRowsPaginated(); let i = index" [class.destacada]="row.destacada">
                 <ng-container *ngIf="row.fields[0].rowspan; else normal">
                     <ng-container *ngFor="let field of row.fields; let f = index">
-                        <th *ngIf="f == 0; else resto" [attr.rowspan]="row.fields[0].rowspan">{{row.fields[0].content}}</th>
+                        <th *ngIf="f == 0; else resto" [attr.rowspan]="row.fields[0].rowspan">{{row.fields[0].content}}
+                        </th>
                         <ng-template #resto>
                             <td>
                                 {{field.content}}
@@ -34,7 +35,7 @@
             <tr *ngIf="config.cabecera" class="separacion-cabecera">
                 <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
             </tr>
-            <tr *ngFor="let row of config.rows" [class.destacada]="row.destacada">
+            <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields">
                     {{field.content}}
                 </td>
@@ -50,7 +51,7 @@
                 <th scope="col" [attr.colspan]="config.rows[config.rows.length - 1].fields.length">
                     {{config.cabecera[0]}}</th>
             </tr>
-            <tr *ngFor="let row of config.rows" [class.destacada]="row.destacada">
+            <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields">
                     {{field.content}}
                 </td>
@@ -58,5 +59,27 @@
         </tbody>
     </table>
 
+    <div *ngIf="config.paginado" class="paginacion simple-pagination izq" aria-hidden="true">
+        <ul>
+            <li [class.disabled]="config.paginado.page === 1">
+                <span *ngIf="config.paginado.page === 1" class="current prev">&lt;</span>
+                <a (click)="goToPage(config.paginado.page - 1)" *ngIf="config.paginado.page > 1" class="page-link next handy">&lt;</a>
+            </li>
+            <li *ngFor="let p of getPages()">
+                <span *ngIf="p === config.paginado.page" class="current">{{p}}</span>
+                <a (click)="goToPage(p)" *ngIf="p !== config.paginado.page" class="page-link handy">{{p}}</a>
+            </li>
+            <li [class.disabled]="config.paginado.page === getPages().length">
+                <span *ngIf="config.paginado.page === getPages().length" class="current prev">&gt;</span>
+                <a (click)="goToPage(config.paginado.page + 1)" *ngIf="config.paginado.page < getPages().length" class="page-link next handy">&gt;</a>
+            </li>
+        </ul>
+        <div [formGroup]="formularioLimite">
+            <select formControlName="limite">
+                <option *ngFor="let limit of limits" [value]="limit">{{limit}}</option>
+                <option [value]="'all'">Todos</option>
+            </select>
+        </div>
+    </div>
 
 </ng-container>
