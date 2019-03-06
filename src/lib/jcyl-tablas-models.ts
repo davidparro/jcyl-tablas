@@ -26,6 +26,7 @@ export class Field {
     rowspan: number;
     content: string;
     isButton: boolean;
+    class: string;
 
     constructor(props) {
         Object.assign(this, props);
