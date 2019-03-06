@@ -52,10 +52,6 @@ export class JcylTablasComponent implements OnInit {
 
     getRowsPaginated(): Row[] {
         if (this.config.paginado) {
-            console.log(
-                (this.config.paginado.page - 1) * this.config.paginado.limit,
-                ((this.config.paginado.page - 1) * this.config.paginado.limit) + this.config.paginado.limit
-                );
             return this.config.rows.slice(
                 (this.config.paginado.page - 1) * this.config.paginado.limit,
                 ((this.config.paginado.page - 1) * this.config.paginado.limit) + this.config.paginado.limit
