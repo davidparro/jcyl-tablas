@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tabla, Field, Row } from './jcyl-tablas-models';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class JcylTablasComponent implements OnInit {
 
     @Input() config: Tabla;
+    @Output() clicBoton: EventEmitter<any> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
     ]
@@ -75,5 +76,13 @@ export class JcylTablasComponent implements OnInit {
 
     goToPage(page: number) {
         this.config.paginado.page = page;
+    }
+
+    clicedBoton(nombreBoton: string, obj: Row) {
+        const resultado = {
+            fila: obj,
+            boton: nombreBoton
+        }
+        this.clicBoton.emit(resultado);
     }
 }
