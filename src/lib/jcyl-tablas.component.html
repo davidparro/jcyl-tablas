@@ -44,7 +44,7 @@
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
                             type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
                     </form>
-                    <img [class]="field.class ? field.class : '' *ngIf="field.isImg" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
+                    <img [class]="field.class ? field.class : ''" *ngIf="field.isImg" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>
         </tbody>
