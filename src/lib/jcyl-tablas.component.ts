@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tabla, Field, Row } from './jcyl-tablas-models';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jcyl-jcyl-tablas',
@@ -17,7 +18,8 @@ export class JcylTablasComponent implements OnInit {
     formularioLimite: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private router: Router
     ) {
         this.crearFormularioLimite();
     }
@@ -84,5 +86,11 @@ export class JcylTablasComponent implements OnInit {
             boton: nombreBoton
         }
         this.clicBoton.emit(resultado);
+    }
+
+    imgGoTo(field: Field) {
+        this.router.navigate([
+            field.imgLink
+        ]);
     }
 }

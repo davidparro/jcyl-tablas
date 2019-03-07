@@ -27,6 +27,10 @@ export class Field {
     content: string;
     isButton: boolean;
     class: string;
+    isImg: boolean;
+    src = '';
+    alt = '';
+    imgLink = '';
 
     constructor(props) {
         Object.assign(this, props);

@@ -37,7 +37,14 @@
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields">
-                    {{field.content}}
+                    <span *ngIf="!field.isButton">
+                        {{field.content}}
+                    </span>
+                    <form class="buscador-especifico">
+                        <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
+                            type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
+                    </form>
+                    <img *ngIf="field.isImg" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>
         </tbody>
@@ -57,7 +64,8 @@
                         {{field.content}}
                     </span>
                     <form class="buscador-especifico">
-                        <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content" type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton"/>
+                        <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
+                            type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
                     </form>
                 </td>
             </tr>
