@@ -25,6 +25,7 @@ export class Field {
     colspan: number;
     rowspan: number;
     content: string;
+    classTD = '';
     isButton: boolean;
     class: string;
     isImg: boolean;

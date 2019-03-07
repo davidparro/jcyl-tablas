@@ -36,7 +36,7 @@
                 <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
-                <td *ngFor="let field of row.fields">
+                <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''">
                     <span *ngIf="!field.isButton && !field.isImg">
                         {{field.content}}
                     </span>
