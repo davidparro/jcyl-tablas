@@ -36,13 +36,13 @@
                 <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
-                <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''">
+                <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''" [class.mp0]="field.isSeleccionable">
                     <span *ngIf="!field.isButton && !field.isImg && !field.isSeleccionable">
                         {{field.content}}
                     </span>
-                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC">
-                        <input [class]="field.class ? field.class +' ' : ''" [checked]="field.selected"
-                            type="checkbox" (click)="toggleSeleccion(field, row)"/>
+                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy" (click)="toggleSeleccion(field, row)">
+                        <input [class]="field.class ? field.class +' handy' : 'handy'" [checked]="field.selected"
+                            type="checkbox"/>
                     </form>
                     <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
