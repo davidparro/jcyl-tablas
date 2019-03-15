@@ -16,6 +16,8 @@ export class Tabla {
 export class Row {
     fields: Field[];
     destacada: boolean;
+    idTemp: number;
+
     constructor(props) {
         Object.assign(this, props);
     }
@@ -32,6 +34,8 @@ export class Field {
     src = '';
     alt = '';
     imgLink = '';
+    isSeleccionable = false;
+    selected = false;
 
     constructor(props) {
         Object.assign(this, props);

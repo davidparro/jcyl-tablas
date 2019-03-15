@@ -37,14 +37,18 @@
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''">
-                    <span *ngIf="!field.isButton && !field.isImg">
+                    <span *ngIf="!field.isButton && !field.isImg && !field.isSeleccionable">
                         {{field.content}}
                     </span>
-                    <form class="buscador-especifico">
-                        <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
-                            type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
+                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC">
+                        <input [class]="field.class ? field.class +' ' : ''" [checked]="field.selected"
+                            type="checkbox" (click)="toggleSeleccion(field, row)"/>
                     </form>
-                    <img [class]="field.class ? field.class : ''" *ngIf="field.isImg" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
+                    <form *ngIf="field.isButton" class="buscador-especifico">
+                        <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
+                            type="button" role="button" (click)="clicedBoton(field.content, row)"/>
+                    </form>
+                    <img *ngIf="field.isImg" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>
         </tbody>
@@ -97,4 +101,9 @@
         </div>
     </div>
 
+    <div *ngIf="rowsSelected.length > 0">
+        <form class="buscador-especifico textC">
+            <input role="button" type="button" class="boton" value="Seleccionar" (click)="sendSelectedRow()">
+        </form>
+    </div>
 </ng-container>

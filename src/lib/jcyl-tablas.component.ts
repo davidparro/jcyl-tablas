@@ -12,10 +12,12 @@ export class JcylTablasComponent implements OnInit {
 
     @Input() config: Tabla;
     @Output() clicBoton: EventEmitter<any> = new EventEmitter();
+    @Output() sendSelected: EventEmitter<Row[]> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
-    ]
+    ];
     formularioLimite: FormGroup;
+    rowsSelected: Row[];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -30,6 +32,10 @@ export class JcylTablasComponent implements OnInit {
                 this.config.paginado.limit
             );
         }
+        this.rowsSelected = [];
+        this.config.rows.forEach((row, i) => {
+            row.idTemp = i + 1;
+        });
     }
 
     crearFormularioLimite() {
@@ -92,5 +98,30 @@ export class JcylTablasComponent implements OnInit {
         this.router.navigate([
             field.imgLink
         ]);
+    }
+
+    toggleSeleccion(campo: Field, fila: Row) {
+        console.log('Fila: ', fila);
+        console.log('Campo: ', campo);
+        console.log('RowsSelected: ', this.rowsSelected);
+        if (this.rowsSelected.find(r => r.idTemp === fila.idTemp)) {
+            const posicion = this.rowsSelected.indexOf(fila);
+            this.rowsSelected.splice(posicion, 1);
+            campo.selected = false;
+        } else {
+            this.rowsSelected.push(fila);
+            campo.selected = true;
+        }
+
+        console.log(this.rowsSelected);
+    }
+
+    sendSelectedRow() {
+        this.rowsSelected.forEach(r => {
+            delete r.idTemp;
+        });
+        setTimeout(() => {
+            this.sendSelected.emit(this.rowsSelected);
+        });
     }
 }
