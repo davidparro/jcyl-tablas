@@ -7,6 +7,7 @@ export class Tabla {
     isTypeC: boolean;
     rows: Row[];
     paginado: Paginado;
+    id: number;
 
     constructor(props) {
         Object.assign(this, props);
@@ -17,6 +18,7 @@ export class Row {
     fields: Field[];
     destacada: boolean;
     idTemp: number;
+    id: number;
 
     constructor(props) {
         Object.assign(this, props);
