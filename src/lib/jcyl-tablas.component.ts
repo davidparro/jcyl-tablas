@@ -86,7 +86,7 @@ export class JcylTablasComponent implements OnInit {
         this.config.paginado.page = page;
     }
 
-    clicedBoton(nombreBoton: string, obj: Row) {
+    clickedBoton(nombreBoton: string, obj: Row) {
         const resultado = {
             fila: obj,
             boton: nombreBoton
@@ -101,9 +101,6 @@ export class JcylTablasComponent implements OnInit {
     }
 
     toggleSeleccion(campo: Field, fila: Row) {
-        console.log('Fila: ', fila);
-        console.log('Campo: ', campo);
-        console.log('RowsSelected: ', this.rowsSelected);
         if (this.rowsSelected.find(r => r.idTemp === fila.idTemp)) {
             const posicion = this.rowsSelected.indexOf(fila);
             this.rowsSelected.splice(posicion, 1);
@@ -112,8 +109,6 @@ export class JcylTablasComponent implements OnInit {
             this.rowsSelected.push(fila);
             campo.selected = true;
         }
-
-        console.log(this.rowsSelected);
     }
 
     sendSelectedRow() {

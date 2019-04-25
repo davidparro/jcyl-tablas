@@ -46,7 +46,7 @@
                     </form>
                     <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
-                            type="button" role="button" (click)="clicedBoton(field.content, row)"/>
+                            type="button" role="button" (click)="clickedBoton(field.content, row)"/>
                     </form>
                     <img *ngIf="field.isImg" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
                 </td>
@@ -73,7 +73,7 @@
                     </form>
                     <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
-                            type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
+                            type="button" (click)="clickedBoton(field.content, row)" *ngIf="field.isButton" />
                     </form>
                 </td>
             </tr>

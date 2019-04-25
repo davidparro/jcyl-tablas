@@ -19,6 +19,8 @@ export class Row {
     destacada: boolean;
     idTemp: number;
     id: number;
+    selected = false;
+    object: any;
 
     constructor(props) {
         Object.assign(this, props);
