@@ -64,10 +64,14 @@
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields">
-                    <span *ngIf="!field.isButton">
+                    <span *ngIf="!field.isButton && !field.isSeleccionable">
                         {{field.content}}
                     </span>
-                    <form class="buscador-especifico">
+                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy" (click)="toggleSeleccion(field, row)">
+                        <input [class]="field.class ? field.class +' handy' : 'handy'" [checked]="field.selected"
+                            type="checkbox"/>
+                    </form>
+                    <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
                             type="button" (click)="clicedBoton(field.content, row)" *ngIf="field.isButton" />
                     </form>
