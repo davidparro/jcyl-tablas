@@ -49,8 +49,6 @@ export class AppModule {}
 <details><summary>Field</summary>
 <p>
 
-#### yes, even hidden code blocks!
-
 |Atributo|Tipo|Descripción|
 |---|---|---|
 |colspan|number|Colspan de la celda|
@@ -66,16 +64,57 @@ export class AppModule {}
 |isSeleccionable|boolean|Indica que queremos que la celda sea un checkbox|
 |selected|boolean|Atributo para los checkbox si queremos que estén seleccionados|
 
+
+#### Ejemplos
+```
+new Field({
+    isSeleccionable: true
+})
+
+new Field({
+    content: 'CONSEJERO DE EDUCACIÓN'
+})
+
+new Field({
+    content: 'No',
+    isButton: true,
+    class: 'btn-sm'
+})
+```
+
 </p>
 </details>
 
 <details><summary>Row</summary>
 <p>
 
-#### yes, even hidden code blocks!
+|Atributo|Tipo|Descripción|
+|---|---|---|
+|fields|Field[]|Array de objetos Field para pintar el contenido de la fila|
+|destacada|boolean|Añade una clase para destacar la línea|
+|id|number|Id para identificar la línea cuando es seleccionable (Field)|
+|selected|boolean|Indica si está seleccionada|
+|object|any|Por si queremos asociar un objeto para que nos le devuelva al tener filas seleccionables|
 
-```python
-print("hello world!")
+
+#### Ejemplos
+```
+new Row({
+    destacada: false,
+    fields: [
+        new Field({
+            isSeleccionable: true
+        }),
+        new Field({
+            content: 'No'
+        }),
+        new Field({
+            content: 'No',
+            isButton: true,
+            class: 'btn-sm'
+        })
+    ]
+})
 ```
 
 </p>
@@ -84,10 +123,161 @@ print("hello world!")
 <details><summary>Tabla</summary>
 <p>
 
-#### yes, even hidden code blocks!
+|Atributo|Tipo|Descripción|
+|---|---|---|
+|cabecera|string[]|Array de string que se mostrarán como cabecera|
+|caption|string|Caption para la tabla|
+|summary|string|Párrafo para mostrar origen de la tabla|
+|isTypeA|boolean|Indica si es una tabla de tipo A ([Ver TIPO A](https://www.jcyl.es/junta/guia/guia-estilos-tablas.html))|
+|isTypeB|boolean|Indica si es una tabla de tipo B ([Ver TIPO B](https://www.jcyl.es/junta/guia/guia-estilos-tablas.html))|
+|isTypeC|boolean|Indica si es una tabla de tipo C ([Ver TIPO C](https://www.jcyl.es/junta/guia/guia-estilos-tablas.html))|
+|rows|Row[]|Array de objetos Row que componen el contenido de la tabla|
+|paginado|Paginado|Añade el paginado a la tabla|
+|id|number|Id que tendrá la tabla|
 
-```python
-print("hello world!")
+
+#### Ejemplos
+```
+new Tabla({
+    cabecera: [
+        '(EN MILLONES DE EUROS)',
+        'LARGO PLAZO',
+        'CORTO PLAZO',
+        'TOTAL',
+    ],
+    caption: 'Distribución de la deuda según PDE (SEC 2010). Datos a 30 de septiembre de 2016',
+    summary: 'Esto es el summary',
+    isTypeA: true,
+    rows: [
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'DEUDA FINANCIERA',
+                    rowspan: 6
+                }),
+                new Field({
+                    content: 'Administración general (Admón. Gral. + Fondo Facilidad Financiera)'
+                }),
+                new Field({
+                    content: '9.775,98'
+                }),
+                new Field({
+                    content: '0'
+                }),
+                new Field({
+                    content: '9.775,98'
+                })
+            ]
+        }),
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'Universidades, organismos autónomos administrativos y similares'
+                }),
+                new Field({
+                    content: '394,78'
+                }),
+                new Field({
+                    content: '2,56'
+                }),
+                new Field({
+                    content: '397,34'
+                })
+            ]
+        }),
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'Empresas clasificadas como administración pública'
+                }),
+                new Field({
+                    content: '99,66'
+                }),
+                new Field({
+                    content: '0'
+                }),
+                new Field({
+                    content: '99,66'
+                })
+            ]
+        }),
+        new Row({
+            destacada: true,
+            fields: [
+                new Field({
+                    content: 'TOTAL'
+                }),
+                new Field({
+                    content: '10.270,42'
+                }),
+                new Field({
+                    content: '2,56'
+                }),
+                new Field({
+                    content: '10.272,98'
+                })
+            ]
+        }),
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'Factoring sin recurso'
+                }),
+                new Field({
+                    content: '329,04'
+                }),
+                new Field({
+                    content: '9,19'
+                }),
+                new Field({
+                    content: '338,23'
+                })
+            ]
+        }),
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'Otros (Colaboración público-privada) (*)'
+                }),
+                new Field({
+                    content: '299,19'
+                }),
+                new Field({
+                    content: '0'
+                }),
+                new Field({
+                    content: '299,19'
+                })
+            ]
+        }),
+        new Row({
+            destacada: false,
+            fields: [
+                new Field({
+                    content: 'TOTAL DEUDA PROTOCOLO DÉFICIT EXCESIVO',
+                    rowspan: 1
+                }),
+                new Field({
+                    content: ''
+                }),
+                new Field({
+                    content: '10.898,60'
+                }),
+                new Field({
+                    content: '11,75'
+                }),
+                new Field({
+                    content: '10.910,40'
+                })
+            ]
+        })
+    ]
+});
 ```
 
 </p>
