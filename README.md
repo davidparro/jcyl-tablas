@@ -66,7 +66,7 @@ export class AppModule {}
 
 
 #### Ejemplos
-```
+```js
 new Field({
     isSeleccionable: true
 })
@@ -98,7 +98,7 @@ new Field({
 
 
 #### Ejemplos
-```
+```js
 new Row({
     destacada: false,
     fields: [
@@ -137,7 +137,7 @@ new Row({
 
 
 #### Ejemplos
-```
+```js
 new Tabla({
     cabecera: [
         '(EN MILLONES DE EUROS)',
