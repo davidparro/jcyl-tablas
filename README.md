@@ -6,7 +6,7 @@ Con este componente podemos generar tablas de los tipos A,B y C.
 
 Demo online: [StackBlitz](https://stackblitz.com/edit/angular-p96rqn)
 
-#Instalación
+# Instalación
 
 Debemos descargar desde el [Repositorio de la junta de Castilla y León](https://github.com/juntadecastillayleon) las carpetas de la guía de estilos, para poder importar los css, js, fuentes, etc.
 
@@ -19,12 +19,12 @@ assets
     img
 ```
 
-##NPM
+## NPM
 ```shell
 npm install jcyl-tablas
 ```
 
-##Importación de dependencias
+## Importación de dependencias
 
 ```js
 
@@ -282,3 +282,25 @@ new Tabla({
 
 </p>
 </details>
+
+## Envío y recibo de eventos
+
+Para pasar el objeto Tabla al componente, debemos asignarlo así [config]="tabla".
+Dependiendo de si tenemos campos seleccionables y la configuración de la tabla, podremos recibir dos eventos:
+(sendSelected)="getSelected($event)" y (clicBoton)="botonClicked($event)"
+
+```html
+<jcyl-jcyl-tablas [config]="tabla" (sendSelected)="getSelected($event)"></jcyl-jcyl-tablas>
+```
+### Configuración de la tabla
+
+|Atributo|Descripción|
+|---|---|
+|config|Objeto que tiene que recibir el objeto Tabla como parámetro|
+
+### Eventos
+
+|Evento|Descripción|
+|---|---|
+|sendSelected|Recibe todas las filas seleccionadas en caso de que sean seleccionables|
+|capclicBotontion|Recibe el evento al clicar un botón en caso de que un campo Field sea botón|
