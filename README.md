@@ -43,3 +43,41 @@ import { JcylTablasModule } from 'jcyl-tablas';
 })
 export class AppModule {}
 ```
+
+## Clases
+
+<details><summary>Field</summary>
+<p>
+
+#### yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
+
+<details><summary>Row</summary>
+<p>
+
+#### yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
+
+<details><summary>Tabla</summary>
+<p>
+
+#### yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
