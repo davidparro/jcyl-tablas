@@ -51,9 +51,20 @@ export class AppModule {}
 
 #### yes, even hidden code blocks!
 
-```python
-print("hello world!")
-```
+|Atributo|Tipo|Descripción|
+|---|---|---|
+|colspan|number|Colspan de la celda|
+|rowspan|number|Rowspan de la celda|
+|content|string|Contenido que se visualizará en la celda|
+|classTD|string|Clase que se añade al TD|
+|isButton|boolean|Indica si queremos que sea un botón|
+|class|string|Clase que se añade al contenido|
+|isImg|boolean|Indica si queremos que el contenido sea una imagen|
+|src|string|Referencia en caso de que sea una imagen|
+|alt|string|Contenido en caso de que la imagen no esté dispnible|
+|imgLink|string|Enlace de la imagen en caso de que sea clicable|
+|isSeleccionable|boolean|Indica que queremos que la celda sea un checkbox|
+|selected|boolean|Atributo para los checkbox si queremos que estén seleccionados|
 
 </p>
 </details>
