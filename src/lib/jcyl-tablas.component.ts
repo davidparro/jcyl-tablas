@@ -73,13 +73,8 @@ export class JcylTablasComponent implements OnInit {
     }
 
     getPages(): number[] {
-        const resto = this.config.paginado.count % this.config.paginado.limit;
-        let entero = Math.floor(this.config.paginado.count / this.config.paginado.limit);
         const resultado: number[] = [];
-        if (resto > 0) {
-            entero = entero + 1;
-        }
-        for (let i = 1; i <= entero; i++) {
+        for (let i = 1; i <= this.config.paginado.count; i++) {
             resultado.push(i);
         }
         return resultado;
