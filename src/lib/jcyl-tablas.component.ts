@@ -31,7 +31,8 @@ export class JcylTablasComponent implements OnInit {
     ngOnInit() {
         if (this.config.paginado) {
             this.formularioLimite.get('limite').setValue(
-                this.config.paginado.limit
+                this.config.paginado.limit,
+                { emitEvent: false }
             );
         }
         this.rowsSelected = [];
@@ -42,7 +43,7 @@ export class JcylTablasComponent implements OnInit {
 
     crearFormularioLimite() {
         this.formularioLimite = this.formBuilder.group({
-            limite: 0
+            limite: 10
         });
         this.setFormularioLimiteListeners();
     }
@@ -53,10 +54,11 @@ export class JcylTablasComponent implements OnInit {
                 if (data) {
                     if (data > this.config.paginado.count || data === 'all') {
                         this.config.paginado.limit = this.config.paginado.count;
+                        this.changeLimit.emit(this.config.paginado.count);
                     } else {
                         this.config.paginado.limit = parseInt(data, 10);
+                        this.changeLimit.emit(parseInt(data, 10));
                     }
-                    this.changeLimit.emit(this.config.paginado.limit);
                 }
             }
         );
