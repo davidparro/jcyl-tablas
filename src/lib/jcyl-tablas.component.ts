@@ -13,7 +13,7 @@ export class JcylTablasComponent implements OnInit {
     @Input() config: Tabla;
     @Output() clicBoton: EventEmitter<any> = new EventEmitter();
     @Output() sendSelected: EventEmitter<Row[]> = new EventEmitter();
-    @Output() changeLimit: EventEmitter<number> = new EventEmitter();
+    @Output() changeLimit: EventEmitter<string> = new EventEmitter();
     @Output() changePage: EventEmitter<number> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
@@ -51,13 +51,14 @@ export class JcylTablasComponent implements OnInit {
     setFormularioLimiteListeners() {
         this.formularioLimite.get('limite').valueChanges.subscribe(
             data => {
+                console.log(data);
                 if (data) {
                     if (data > this.config.paginado.count || data === 'all') {
                         this.config.paginado.limit = this.config.paginado.count;
-                        this.changeLimit.emit(this.config.paginado.count);
+                        this.changeLimit.emit(data);
                     } else {
                         this.config.paginado.limit = parseInt(data, 10);
-                        this.changeLimit.emit(parseInt(data, 10));
+                        this.changeLimit.emit(data);
                     }
                 }
             }
