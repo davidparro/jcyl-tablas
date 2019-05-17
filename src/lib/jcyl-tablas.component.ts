@@ -13,6 +13,8 @@ export class JcylTablasComponent implements OnInit {
     @Input() config: Tabla;
     @Output() clicBoton: EventEmitter<any> = new EventEmitter();
     @Output() sendSelected: EventEmitter<Row[]> = new EventEmitter();
+    @Output() changeLimit: EventEmitter<number> = new EventEmitter();
+    @Output() changePage: EventEmitter<number> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
     ];
@@ -54,6 +56,7 @@ export class JcylTablasComponent implements OnInit {
                     } else {
                         this.config.paginado.limit = parseInt(data, 10);
                     }
+                    this.changeLimit.emit(this.config.paginado.limit);
                 }
             }
         );
@@ -83,7 +86,8 @@ export class JcylTablasComponent implements OnInit {
     }
 
     goToPage(page: number) {
-        this.config.paginado.page = page;
+        // this.config.paginado.page = page;
+        this.changePage.emit(page);
     }
 
     clickedBoton(nombreBoton: string, obj: Row) {
