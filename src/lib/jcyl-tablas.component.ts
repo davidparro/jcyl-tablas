@@ -36,8 +36,10 @@ export class JcylTablasComponent implements OnInit {
             );
         }
         this.rowsSelected = [];
-        this.config.rows.forEach((row, i) => {
-            row.idTemp = i + 1;
+        setTimeout(() => {
+            this.config.rows.forEach((row, i) => {
+                row.idTemp = i + 1;
+            });
         });
     }
 
