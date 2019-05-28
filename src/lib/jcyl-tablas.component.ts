@@ -37,6 +37,7 @@ export class JcylTablasComponent implements OnInit {
         }
         this.rowsSelected = [];
         setTimeout(() => {
+            console.log(this.config.rows);
             this.config.rows.forEach((row, i) => {
                 row.idTemp = i + 1;
             });
@@ -53,7 +54,6 @@ export class JcylTablasComponent implements OnInit {
     setFormularioLimiteListeners() {
         this.formularioLimite.get('limite').valueChanges.subscribe(
             data => {
-                console.log(data);
                 if (data) {
                     if (data > this.config.paginado.count || data === 'all') {
                         this.config.paginado.limit = this.config.paginado.count;
@@ -98,7 +98,6 @@ export class JcylTablasComponent implements OnInit {
     }
 
     toggleSeleccion(campo: Field, fila: Row) {
-        console.log(this.config.rows);
         if (this.rowsSelected.find(r => r.idTemp === fila.idTemp)) {
             const posicion = this.rowsSelected.indexOf(fila);
             this.rowsSelected.splice(posicion, 1);
