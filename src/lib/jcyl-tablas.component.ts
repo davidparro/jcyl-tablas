@@ -68,12 +68,6 @@ export class JcylTablasComponent implements OnInit {
     }
 
     getRowsPaginated(): Row[] {
-        /*if (this.config.paginado) {
-            return this.config.rows.slice(
-                (this.config.paginado.page - 1) * this.config.paginado.limit,
-                ((this.config.paginado.page - 1) * this.config.paginado.limit) + this.config.paginado.limit
-            );
-        }*/
         return this.config.rows;
     }
 
@@ -86,7 +80,6 @@ export class JcylTablasComponent implements OnInit {
     }
 
     goToPage(page: number) {
-        // this.config.paginado.page = page;
         this.changePage.emit(page);
     }
 
@@ -105,6 +98,7 @@ export class JcylTablasComponent implements OnInit {
     }
 
     toggleSeleccion(campo: Field, fila: Row) {
+        console.log(this.config.rows);
         if (this.rowsSelected.find(r => r.idTemp === fila.idTemp)) {
             const posicion = this.rowsSelected.indexOf(fila);
             this.rowsSelected.splice(posicion, 1);
