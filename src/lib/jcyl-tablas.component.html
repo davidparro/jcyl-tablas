@@ -33,10 +33,10 @@
         <caption *ngIf="config.caption">{{config.caption}}</caption>
         <tbody>
             <tr *ngIf="config.cabecera" class="separacion-cabecera">
-                <th scope="col" [class.handy]="campo.canSort" *ngFor="let campo of config.cabecera">
+                <th scope="col" *ngFor="let campo of config.cabecera">
                     {{campo.content}}
                     <ng-container *ngIf="campo.canSort">
-                        <div class="svg-container" *ngIf="campo.sort === 'desc'" (click)="sortFields(campo)">
+                        <div class="svg-container handy" *ngIf="campo.sort === 'desc'" (click)="sortFields(campo)">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down"
                                 class="svg-inline--fa fa-sort-down fa-w-10" role="img"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -45,7 +45,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="svg-container" *ngIf="campo.sort === 'asc'" (click)="sortFields(campo)">
+                        <div class="svg-container handy" *ngIf="campo.sort === 'asc'" (click)="sortFields(campo)">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-up"
                                 class="svg-inline--fa fa-sort-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 320 512">
@@ -54,7 +54,7 @@
                                 </path>
                             </svg>
                         </div>
-                        <div class="svg-container" *ngIf="campo.sort === null" (click)="sortFields(campo)">
+                        <div class="svg-container handy" *ngIf="campo.sort === null" (click)="sortFields(campo)">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort"
                                 class="svg-inline--fa fa-sort fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 320 512">
