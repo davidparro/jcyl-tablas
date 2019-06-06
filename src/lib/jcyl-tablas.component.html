@@ -5,7 +5,7 @@
         <tbody>
             <tr *ngIf="config.cabecera" class="separacion-cabecera">
                 <td></td>
-                <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
+                <th scope="col" *ngFor="let campo of config.cabecera">{{campo.content}}</th>
             </tr>
             <tr *ngFor="let row of getRowsPaginated(); let i = index" [class.destacada]="row.destacada">
                 <ng-container *ngIf="row.fields[0].rowspan; else normal">
@@ -33,22 +33,56 @@
         <caption *ngIf="config.caption">{{config.caption}}</caption>
         <tbody>
             <tr *ngIf="config.cabecera" class="separacion-cabecera">
-                <th scope="col" *ngFor="let campo of config.cabecera">{{campo}}</th>
+                <th scope="col" [class.handy]="campo.canSort" *ngFor="let campo of config.cabecera" (click)="sortFields(campo)">
+                    {{campo.content}}
+                    <ng-container *ngIf="campo.canSort">
+                        <ng-container *ngIf="campo.sort === 'desc'">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-down"
+                                class="svg-inline--fa fa-sort-down fa-w-10" role="img"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z">
+                                </path>
+                            </svg>
+                        </ng-container>
+                        <ng-container *ngIf="campo.sort === 'asc'">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort-up"
+                                class="svg-inline--fa fa-sort-up fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z">
+                                </path>
+                            </svg>
+                        </ng-container>
+                        <ng-container *ngIf="campo.sort === null">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort"
+                                class="svg-inline--fa fa-sort fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                    d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z">
+                                </path>
+                            </svg>
+                        </ng-container>
+                    </ng-container>
+                </th>
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
-                <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''" [class.mp0]="field.isSeleccionable">
+                <td *ngFor="let field of row.fields" [class]="field.classTD ? field.classTD : ''"
+                    [class.mp0]="field.isSeleccionable">
                     <span *ngIf="!field.isButton && !field.isImg && !field.isSeleccionable">
                         {{field.content}}
                     </span>
-                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy" (click)="toggleSeleccion(field, row)">
+                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy"
+                        (click)="toggleSeleccion(field, row)">
                         <input [class]="field.class ? field.class +' handy' : 'handy'" [checked]="field.selected"
-                            type="checkbox"/>
+                            type="checkbox" />
                     </form>
                     <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
-                            type="button" role="button" (click)="clickedBoton(field.content, row)"/>
+                            type="button" role="button" (click)="clickedBoton(field.content, row)" />
                     </form>
-                    <img *ngIf="field.isImg" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
+                    <img *ngIf="field.isImg" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)"
+                        [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>
         </tbody>
@@ -60,16 +94,17 @@
         <tbody>
             <tr *ngIf="config.cabecera" class="separacion-cabecera">
                 <th scope="col" [attr.colspan]="config.rows[config.rows.length - 1].fields.length">
-                    {{config.cabecera[0]}}</th>
+                    {{config.cabecera[0].content}}</th>
             </tr>
             <tr *ngFor="let row of getRowsPaginated()" [class.destacada]="row.destacada">
                 <td *ngFor="let field of row.fields">
                     <span *ngIf="!field.isButton && !field.isSeleccionable">
                         {{field.content}}
                     </span>
-                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy" (click)="toggleSeleccion(field, row)">
+                    <form *ngIf="field.isSeleccionable" class="buscador-especifico textC handy"
+                        (click)="toggleSeleccion(field, row)">
                         <input [class]="field.class ? field.class +' handy' : 'handy'" [checked]="field.selected"
-                            type="checkbox"/>
+                            type="checkbox" />
                     </form>
                     <form *ngIf="field.isButton" class="buscador-especifico">
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"

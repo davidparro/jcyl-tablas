@@ -1,58 +1,70 @@
 export class Tabla {
-    cabecera: string[];
-    caption: string;
-    summary: string;
-    isTypeA: boolean;
-    isTypeB: boolean;
-    isTypeC: boolean;
-    rows: Row[];
-    paginado: Paginado;
-    id: number;
+    cabecera: Cabecera[];
+    caption?: string = null;
+    summary?: string = null;
+    isTypeA?: boolean = null;
+    isTypeB?: boolean = null;
+    isTypeC?: boolean = null;
+    rows?: Row[] = null;
+    paginado?: Paginado = null;
+    id?: number = null;
 
-    constructor(props) {
+    constructor(props: Tabla) {
         Object.assign(this, props);
     }
 }
 
 export class Row {
     fields: Field[];
-    destacada: boolean;
-    idTemp: number;
-    id: number;
-    selected = false;
-    object: any;
+    destacada?: boolean = null;
+    idTemp?: number = null;
+    id?: number = null;
+    selected ? = false;
+    object?: any = null;
 
-    constructor(props) {
+    constructor(props: Row) {
         Object.assign(this, props);
     }
 }
 
 export class Field {
-    colspan: number;
-    rowspan: number;
-    content: string;
-    classTD = '';
-    isButton: boolean;
-    class: string;
-    isImg: boolean;
-    src = '';
-    alt = '';
-    imgLink = '';
-    isSeleccionable = false;
-    selected = false;
+    colspan?: number = null;
+    rowspan?: number = null;
+    content?: string = null;
+    classTD ? = '';
+    isButton?: boolean = null;
+    class?: string = null;
+    isImg?: boolean = null;
+    src ? = '';
+    alt ? = '';
+    imgLink ? = '';
+    isSeleccionable ? = false;
+    selected ? = false;
 
-    constructor(props) {
+    constructor(props: Field) {
         Object.assign(this, props);
     }
 }
 
 export class Paginado {
-    limit: number;
-    page: number;
-    start: number;
-    end: number;
-    count: number;
-    constructor(props) {
+    limit: number = null;
+    page: number = null;
+    start?: number = null;
+    end?: number = null;
+    count: number = null;
+    constructor(props: Paginado) {
+        Object.assign(this, props);
+    }
+}
+
+export class Cabecera {
+    content: string;
+    canSort ? = false;
+    sort?: string = null;
+    type?: string = null;
+    canFilter ? = false;
+    filter?: string = null;
+    constructor(props: Cabecera) {
         Object.assign(this, props);
     }
 }

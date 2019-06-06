@@ -15,6 +15,8 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     @Output() sendSelected: EventEmitter<Row[]> = new EventEmitter();
     @Output() changeLimit: EventEmitter<string> = new EventEmitter();
     @Output() changePage: EventEmitter<number> = new EventEmitter();
+    @Output() sort: EventEmitter<boolean> = new EventEmitter();
+    @Output() filters: EventEmitter<boolean> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
     ];
@@ -122,5 +124,28 @@ export class JcylTablasComponent implements OnInit, OnChanges {
         setTimeout(() => {
             this.sendSelected.emit(this.rowsSelected);
         });
+    }
+
+    sortFields(campo) {
+        this.config.cabecera.forEach(element => {
+            if (campo === element) {
+                switch (element.sort) {
+                    case 'asc':
+                        element.sort = 'desc';
+                        break;
+                    case 'desc':
+                        element.sort = null;
+                        break;
+                    case null:
+                        element.sort = 'asc';
+                        break;
+                }
+            } else {
+                if (element.canSort) {
+                    element.sort = null;
+                }
+            }
+        });
+        this.sort.emit(campo);
     }
 }
