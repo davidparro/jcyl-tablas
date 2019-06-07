@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs';
+
 export class Tabla {
     cabecera: Cabecera[];
     caption?: string = null;
@@ -8,6 +10,7 @@ export class Tabla {
     rows?: Row[] = null;
     paginado?: Paginado = null;
     id?: number = null;
+    loadingTabla?: Subject<boolean> = new Subject<boolean>();
 
     constructor(props: Tabla) {
         Object.assign(this, props);

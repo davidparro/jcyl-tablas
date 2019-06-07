@@ -17,6 +17,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     @Output() changePage: EventEmitter<number> = new EventEmitter();
     @Output() sort: EventEmitter<boolean> = new EventEmitter();
     @Output() filters: EventEmitter<Filtro[]> = new EventEmitter();
+
     limits: number[] = [
         1, 5, 10, 25, 50
     ];
@@ -27,6 +28,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     showFilters = false;
     filtrosAplicados: Filtro[] = [];
     campoSeleccionado: Cabecera = null;
+    loadingTabla: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -50,6 +52,11 @@ export class JcylTablasComponent implements OnInit, OnChanges {
             });
             this.canFilter();
         });
+        this.config.loadingTabla.subscribe(
+            data => {
+                this.loadingTabla = data;
+            }
+        );
     }
 
     canFilter() {
@@ -224,4 +231,5 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     emitFilters() {
         this.filters.emit(this.filtrosAplicados);
     }
+
 }
