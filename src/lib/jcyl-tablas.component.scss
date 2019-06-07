@@ -1,6 +1,9 @@
 .handy{
     cursor: pointer;
 }
+.notAllowed{
+    cursor: not-allowed;
+}
 .textC {
     text-align: center;
 }
@@ -84,3 +87,26 @@
       float: right;
       margin-left: 4px;
   }
+
+.filter-container{
+    background-color: #f0f0f0;
+}
+.btn-filtro {
+    display: inline-block;
+    margin: 10px;
+}
+
+.addFilter{
+    float: none;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.badge {
+    display: inline-block;
+    background-color: #ccc;
+    margin: 2px;
+    vertical-align: middle;
+    padding: 1px 5px;
+    font-size: 13px;
+}

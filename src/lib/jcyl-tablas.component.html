@@ -1,4 +1,78 @@
 <ng-container *ngIf="config">
+    <ng-container *ngIf="showFilterOption">
+        <div class="filter-container">
+            <p class="handy btn-filtro" (click)="showFilters = !showFilters">Filtrar
+                <ng-container *ngIf="!showFilters">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+                </ng-container>
+                <ng-container *ngIf="showFilters">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus" class="svg-inline--fa fa-minus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+                </ng-container>
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="filter"
+                    class="svg-inline--fa fa-filter fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                        d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z">
+                    </path>
+                </svg>
+            </p>
+            <div *ngIf="showFilters">
+                <form [formGroup]="formularioFiltro">
+                    <select formControlName="campo">
+                        <option [ngValue]="null">-- Selecciona una opción</option>
+                        <option *ngFor="let campo of getCamposFiltrables()" [ngValue]="campo">{{campo.content}}
+                        </option>
+                    </select>
+                    <ng-container *ngIf="campoSeleccionado">
+                        <ng-container *ngIf="formularioFiltro.get('campo').value.type === 'text'">
+                            <input formControlName="filtro" type="text">
+                        </ng-container>
+                        <ng-container *ngIf="formularioFiltro.get('campo').value.type === 'number'">
+                            <input formControlName="filtro" type="number">
+                        </ng-container>
+                        <ng-container *ngIf="formularioFiltro.get('campo').value.type === 'date'">
+                            <input formControlName="filtro" type="date">
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!campoSeleccionado">
+                        <input placeholder="Selecciona una opción" readonly formControlName="filtro" type="text">
+                    </ng-container>
+                    <svg *ngIf="formularioFiltro.invalid" aria-hidden="true" focusable="false" data-prefix="fas"
+                        data-icon="plus-square" class="svg-inline--fa fa-plus-square fa-w-14 addFilter notAllowed" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="currentColor"
+                            d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z">
+                        </path>
+                    </svg>
+                    <svg *ngIf="formularioFiltro.valid" (click)="addFiltro()" aria-hidden="true" focusable="false" data-prefix="fas"
+                        data-icon="plus-square" class="svg-inline--fa fa-plus-square fa-w-14 addFilter handy" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="currentColor"
+                            d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z">
+                        </path>
+                    </svg>
+                </form>
+            </div>
+            <div *ngIf="filtrosAplicados.length > 0">
+                <ng-container *ngFor="let filtro of filtrosAplicados">
+                    <div class="badge">
+                        <small>
+                            <span>{{filtro.content}}</span> |
+                            <span>{{filtro.value}}</span>
+                            <svg (click)="removeFiltro(filtro)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"
+                                class="svg-inline--fa fa-times fa-w-11 handy" role="img" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 352 512">
+                                <path fill="currentColor"
+                                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+                                </path>
+                            </svg>
+                        </small>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+
     <table *ngIf="config.isTypeA && !config.isTypeB && !config.isTypeC" class="tabla"
         [summary]="config.summary ? config.summary : ''">
         <caption *ngIf="config.caption">{{config.caption}}</caption>

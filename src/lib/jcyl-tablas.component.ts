@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Tabla, Field, Row } from './jcyl-tablas-models';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Tabla, Field, Row, Cabecera, Filtro } from './jcyl-tablas-models';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,18 +16,24 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     @Output() changeLimit: EventEmitter<string> = new EventEmitter();
     @Output() changePage: EventEmitter<number> = new EventEmitter();
     @Output() sort: EventEmitter<boolean> = new EventEmitter();
-    @Output() filters: EventEmitter<boolean> = new EventEmitter();
+    @Output() filters: EventEmitter<Filtro[]> = new EventEmitter();
     limits: number[] = [
         1, 5, 10, 25, 50
     ];
     formularioLimite: FormGroup;
+    formularioFiltro: FormGroup;
     rowsSelected: Row[];
+    showFilterOption = false;
+    showFilters = false;
+    filtrosAplicados: Filtro[] = [];
+    campoSeleccionado: Cabecera = null;
 
     constructor(
         private formBuilder: FormBuilder,
         private router: Router
     ) {
         this.crearFormularioLimite();
+        this.crearFormularioFiltro();
     }
 
     ngOnInit() {
@@ -42,6 +48,23 @@ export class JcylTablasComponent implements OnInit, OnChanges {
             this.config.rows.forEach((row, i) => {
                 row.idTemp = i + 1;
             });
+            this.canFilter();
+        });
+    }
+
+    canFilter() {
+        this.config.cabecera.forEach(element => {
+            if (element.canFilter === true) {
+                this.showFilterOption = true;
+                if (element.filter) {
+                    this.filtrosAplicados.push(
+                        new Filtro({
+                            content: element.content,
+                            value: element.filter
+                        })
+                    );
+                }
+            }
         });
     }
 
@@ -50,6 +73,20 @@ export class JcylTablasComponent implements OnInit, OnChanges {
             this.config.rows.forEach((row, i) => {
                 row.idTemp = i + 1;
             });
+        });
+    }
+
+    crearFormularioFiltro() {
+        this.formularioFiltro = this.formBuilder.group({
+            filtro: [null, [Validators.required]],
+            campo: [{ value: null, disabled: false }]
+        });
+        this.setFormularioFiltroListeners();
+    }
+
+    setFormularioFiltroListeners() {
+        this.formularioFiltro.get('campo').valueChanges.subscribe((data: Cabecera) => {
+            this.campoSeleccionado = data;
         });
     }
 
@@ -147,5 +184,44 @@ export class JcylTablasComponent implements OnInit, OnChanges {
             }
         });
         this.sort.emit(campo);
+    }
+
+    getCamposFiltrables(): Cabecera[] {
+        const cabecerasConFiltro: Cabecera[] = [];
+        this.config.cabecera.forEach(campo => {
+            if (campo.canFilter) {
+                cabecerasConFiltro.push(campo);
+            }
+        });
+        return cabecerasConFiltro;
+    }
+
+    addFiltro() {
+        if (
+            this.filtrosAplicados.find(f => f.content === this.formularioFiltro.get('campo').value.content) === undefined
+        ) {
+            this.filtrosAplicados.push(
+                new Filtro({
+                    content: this.formularioFiltro.get('campo').value.content,
+                    value: this.formularioFiltro.get('filtro').value
+                })
+            );
+        } else {
+            const index = this.filtrosAplicados.indexOf(
+                this.filtrosAplicados.find(f => f.content === this.formularioFiltro.get('campo').value.content)
+            );
+            this.filtrosAplicados[index].value = this.formularioFiltro.get('filtro').value;
+        }
+        this.emitFilters();
+    }
+
+    removeFiltro(filtro: Filtro) {
+        const index = this.filtrosAplicados.indexOf(filtro);
+        this.filtrosAplicados.splice(index, 1);
+        this.emitFilters();
+    }
+
+    emitFilters() {
+        this.filters.emit(this.filtrosAplicados);
     }
 }

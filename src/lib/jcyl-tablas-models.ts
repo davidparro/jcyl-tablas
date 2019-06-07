@@ -68,3 +68,15 @@ export class Cabecera {
         Object.assign(this, props);
     }
 }
+
+export class Filtro {
+    static c ? = 0;
+    id?: number ;
+    content: string;
+    value: any;
+    constructor(props: Filtro) {
+        Filtro.c++;
+        Object.assign(this, props);
+        this.id = Filtro.c;
+    }
+}
