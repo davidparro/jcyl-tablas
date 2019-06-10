@@ -22,7 +22,8 @@
       font-size:.9em;
       border-collapse:collapse;
       margin-bottom:2em;
-      max-width:99%;
+      max-width:100%;
+      position: relative;
   }
   table:not(.tabla){
       margin:0px auto 2em auto;
@@ -205,11 +206,12 @@
     position: absolute;
     width: 100%;
     text-align: center;
+    height: 100%;
   }
   
   .opacidad {
-      opacity: 0.8 !important;
+      opacity: 0.6 !important;
       & tr{
-          opacity: 0.8 !important;
+          opacity: 0.6 !important;
       }
   }
