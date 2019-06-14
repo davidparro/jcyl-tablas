@@ -89,9 +89,11 @@ export class JcylTablasComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         setTimeout(() => {
-            this.config.rows.forEach((row, i) => {
-                row.idTemp = i + 1;
-            });
+            if (this.config.rows) {
+                this.config.rows.forEach((row, i) => {
+                    row.idTemp = i + 1;
+                });
+            }
         });
     }
 
