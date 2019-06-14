@@ -45,14 +45,14 @@ export class JcylTablasComponent implements OnInit, OnChanges {
                 { emitEvent: false }
             );
         }
-        /*setTimeout(() => {
+        setTimeout(() => {
             if (this.config.rows) {
                 this.config.rows.forEach((row, i) => {
                     row.idTemp = i + 1;
                 });
                 this.canFilter();
             }
-        });*/
+        });
         this.rowsSelected = [];
         this.config.loadingTabla.subscribe(
             data => {
