@@ -62,19 +62,21 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     }
 
     canFilter() {
-        this.config.cabecera.forEach(element => {
-            if (element.canFilter === true) {
-                this.showFilterOption = true;
-                if (element.filter) {
-                    this.filtrosAplicados.push(
-                        new Filtro({
-                            content: element.content,
-                            value: element.filter
-                        })
-                    );
+        if (this.config.cabecera) {
+            this.config.cabecera.forEach(element => {
+                if (element.canFilter === true) {
+                    this.showFilterOption = true;
+                    if (element.filter) {
+                        this.filtrosAplicados.push(
+                            new Filtro({
+                                content: element.content,
+                                value: element.filter
+                            })
+                        );
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     ngOnChanges() {
@@ -83,8 +85,8 @@ export class JcylTablasComponent implements OnInit, OnChanges {
                 this.config.rows.forEach((row, i) => {
                     row.idTemp = i + 1;
                 });
-                this.canFilter();
             }
+            this.canFilter();
         });
     }
 
