@@ -57,7 +57,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
         this.config.loadingTabla.subscribe(
             data => {
                 this.loadingTabla = data;
-                if (data === false) {
+                /*if (data === false) {
                     setTimeout(() => {
                         if (this.config.rows) {
                             this.config.rows.forEach((row, i) => {
@@ -66,7 +66,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
                             this.canFilter();
                         }
                     });
-                }
+                }*/
             }
         );
     }
@@ -93,6 +93,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
                 this.config.rows.forEach((row, i) => {
                     row.idTemp = i + 1;
                 });
+                this.canFilter();
             }
         });
     }
