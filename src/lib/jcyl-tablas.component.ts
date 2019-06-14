@@ -45,16 +45,28 @@ export class JcylTablasComponent implements OnInit, OnChanges {
                 { emitEvent: false }
             );
         }
+        /*setTimeout(() => {
+            if (this.config.rows) {
+                this.config.rows.forEach((row, i) => {
+                    row.idTemp = i + 1;
+                });
+                this.canFilter();
+            }
+        });*/
         this.rowsSelected = [];
-        setTimeout(() => {
-            this.config.rows.forEach((row, i) => {
-                row.idTemp = i + 1;
-            });
-            this.canFilter();
-        });
         this.config.loadingTabla.subscribe(
             data => {
                 this.loadingTabla = data;
+                if (data === false) {
+                    setTimeout(() => {
+                        if (this.config.rows) {
+                            this.config.rows.forEach((row, i) => {
+                                row.idTemp = i + 1;
+                            });
+                            this.canFilter();
+                        }
+                    });
+                }
             }
         );
     }
