@@ -11,6 +11,7 @@ export class Tabla {
     paginado?: Paginado = null;
     id?: number = null;
     loadingTabla?: Subject<boolean> = new Subject<boolean>();
+    emptyText? = 'No se encontró ningun dato';
 
     constructor(props: Tabla) {
         Object.assign(this, props);
@@ -22,7 +23,7 @@ export class Row {
     destacada?: boolean = null;
     idTemp?: number = null;
     id?: number = null;
-    selected ? = false;
+    selected?= false;
     object?: any = null;
 
     constructor(props: Row) {
@@ -34,15 +35,15 @@ export class Field {
     colspan?: number = null;
     rowspan?: number = null;
     content?: string = null;
-    classTD ? = '';
+    classTD?= '';
     isButton?: boolean = null;
     class?: string = null;
     isImg?: boolean = null;
-    src ? = '';
-    alt ? = '';
-    imgLink ? = '';
-    isSeleccionable ? = false;
-    selected ? = false;
+    src?= '';
+    alt?= '';
+    imgLink?= '';
+    isSeleccionable?= false;
+    selected?= false;
 
     constructor(props: Field) {
         Object.assign(this, props);
@@ -62,10 +63,10 @@ export class Paginado {
 
 export class Cabecera {
     content: string;
-    canSort ? = false;
+    canSort?= false;
     sort?: string = null;
     type?: string = null;
-    canFilter ? = false;
+    canFilter?= false;
     filter?: string = null;
     constructor(props: Cabecera) {
         Object.assign(this, props);
@@ -73,8 +74,8 @@ export class Cabecera {
 }
 
 export class Filtro {
-    static c ? = 0;
-    id?: number ;
+    static c?= 0;
+    id?: number;
     content: string;
     value: any;
     constructor(props: Filtro) {

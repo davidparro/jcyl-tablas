@@ -191,7 +191,7 @@
         [summary]="config.summary ? config.summary : ''">
         <caption *ngIf="config.caption">{{config.caption}}</caption>
         <tbody>
-            <tr *ngIf="config.cabecera" class="separacion-cabecera">
+            <tr *ngIf="config.cabecera && config.rows.length > 0" class="separacion-cabecera">
                 <th scope="col" [attr.colspan]="config.rows[config.rows.length - 1].fields.length">
                     {{config.cabecera[0].content}}</th>
             </tr>
@@ -213,6 +213,10 @@
             </tr>
         </tbody>
     </table>
+
+    <div *ngIf="config.rows.length === 0" class="textC">
+        <h2>{{config.emptyText}}</h2>
+    </div>
 
     <div *ngIf="config.paginado" class="paginacion simple-pagination izq" aria-hidden="true">
         <ul>
