@@ -17,6 +17,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     @Output() changePage: EventEmitter<number> = new EventEmitter();
     @Output() sort: EventEmitter<boolean> = new EventEmitter();
     @Output() filters: EventEmitter<Filtro[]> = new EventEmitter();
+    @Output() imgclick: EventEmitter<Field> = new EventEmitter();
 
     limits: number[] = [
         1, 5, 10, 25, 50
@@ -155,6 +156,10 @@ export class JcylTablasComponent implements OnInit, OnChanges {
         this.router.navigate([
             field.imgLink
         ]);
+    }
+
+    sendImgClick(event) {
+
     }
 
     toggleSeleccion(campo: Field, fila: Row) {

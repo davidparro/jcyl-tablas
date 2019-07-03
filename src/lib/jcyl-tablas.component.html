@@ -180,7 +180,9 @@
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
                             type="button" role="button" (click)="clickedBoton(field.content, row)" />
                     </form>
-                    <img *ngIf="field.isImg" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)"
+                    <img *ngIf="field.isImg && !field.imgGetClick" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)"
+                        [src]="field.src" [alt]="field.alt">
+                    <img *ngIf="field.isImg && field.imgGetClick" [class]="field.class ? field.class : ''" (click)="sendImgClick(field)"
                         [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>

@@ -42,6 +42,7 @@ export class Field {
     src?= '';
     alt?= '';
     imgLink?= '';
+    imgGetClick?= false;
     isSeleccionable?= false;
     selected?= false;
 
