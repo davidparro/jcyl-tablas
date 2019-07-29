@@ -11,7 +11,8 @@ export class Tabla {
     paginado?: Paginado = null;
     id?: number = null;
     loadingTabla?: Subject<boolean> = new Subject<boolean>();
-    emptyText? = 'No se encontró ningun dato';
+    emptyText?= 'No se encontró ningun dato';
+    classTr?: string = null;
 
     constructor(props: Tabla) {
         Object.assign(this, props);

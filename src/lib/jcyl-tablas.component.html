@@ -131,7 +131,7 @@
         </div>
         <caption *ngIf="config.caption">{{config.caption}}</caption>
         <tbody [class.opacidad]="loadingTabla">
-            <tr *ngIf="config.cabecera" class="separacion-cabecera">
+            <tr *ngIf="config.cabecera" class="separacion-cabecera" [class]="config.classTr ? config.classTr + ' separacion-cabecera' : 'separacion-cabecera'">
                 <th scope="col" *ngFor="let campo of config.cabecera">
                     {{campo.content}}
                     <ng-container *ngIf="campo.canSort">
