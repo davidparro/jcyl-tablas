@@ -227,10 +227,12 @@
                 <a (click)="goToPage(config.paginado.page - 1)" *ngIf="config.paginado.page > 1"
                     class="page-link next handy">&lt;</a>
             </li>
-            <li *ngFor="let p of getPages()">
-                <span *ngIf="p === config.paginado.page" class="current">{{p}}</span>
-                <a (click)="goToPage(p)" *ngIf="p !== config.paginado.page" class="page-link handy">{{p}}</a>
-            </li>
+            <ng-container *ngFor="let p of getPages(); let i = index">
+                <li *ngIf="(config.paginado.page - PAGINADO_MAX) <= i && (config.paginado.page + PAGINADO_MAX) > (i + 1)">
+                    <span *ngIf="p === config.paginado.page" class="current">{{p}}</span>
+                    <a (click)="goToPage(p)" *ngIf="p !== config.paginado.page" class="page-link handy">{{p}}</a>
+                </li>
+            </ng-container>
             <li [class.disabled]="config.paginado.page === getPages().length">
                 <span *ngIf="config.paginado.page === getPages().length" class="current prev">&gt;</span>
                 <a (click)="goToPage(config.paginado.page + 1)" *ngIf="config.paginado.page < getPages().length"

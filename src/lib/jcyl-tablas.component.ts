@@ -31,6 +31,8 @@ export class JcylTablasComponent implements OnInit, OnChanges {
     campoSeleccionado: Cabecera = null;
     loadingTabla: boolean;
 
+    PAGINADO_MAX = 3;
+
     constructor(
         private formBuilder: FormBuilder,
         private router: Router
