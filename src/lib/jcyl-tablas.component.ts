@@ -150,7 +150,7 @@ export class JcylTablasComponent implements OnInit, OnChanges {
         const resultado = {
             fila: obj,
             boton: nombreBoton
-        }
+        };
         this.clicBoton.emit(resultado);
     }
 

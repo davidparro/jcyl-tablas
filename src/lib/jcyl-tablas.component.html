@@ -131,7 +131,8 @@
         </div>
         <caption *ngIf="config.caption">{{config.caption}}</caption>
         <tbody [class.opacidad]="loadingTabla">
-            <tr *ngIf="config.cabecera" class="separacion-cabecera" [class]="config.classTr ? config.classTr + ' separacion-cabecera' : 'separacion-cabecera'">
+            <tr *ngIf="config.cabecera" class="separacion-cabecera"
+                [class]="config.classTr ? config.classTr + ' separacion-cabecera' : 'separacion-cabecera'">
                 <th scope="col" *ngFor="let campo of config.cabecera">
                     {{campo.content}}
                     <ng-container *ngIf="campo.canSort">
@@ -180,10 +181,10 @@
                         <input [class]="field.class ? field.class +' boton' : 'boton'" [value]="field.content"
                             type="button" role="button" (click)="clickedBoton(field.content, row)" />
                     </form>
-                    <img *ngIf="field.isImg && !field.imgGetClick" [class]="field.class ? field.class : ''" (click)="imgGoTo(field)"
-                        [src]="field.src" [alt]="field.alt">
-                    <img *ngIf="field.isImg && field.imgGetClick" [class]="field.class ? field.class : ''" (click)="sendImgClick(field)"
-                        [src]="field.src" [alt]="field.alt">
+                    <img tabindex="0" *ngIf="field.isImg && !field.imgGetClick" [class]="field.class ? field.class : ''"
+                        (keyup.enter)="imgGoTo(field)" (keydown.space)="imgGoTo(field)" (click)="imgGoTo(field)" [src]="field.src" [alt]="field.alt">
+                    <img tabindex="0" *ngIf="field.isImg && field.imgGetClick" [class]="field.class ? field.class : ''"
+                        (keyup.enter)="sendImgClick(field)" (keydown.space)="sendImgClick(field)" (click)="sendImgClick(field)" [src]="field.src" [alt]="field.alt">
                 </td>
             </tr>
         </tbody>
@@ -222,18 +223,22 @@
 
     <div *ngIf="config.paginado" class="paginacion simple-pagination izq" aria-hidden="true">
         <ul>
-            <li [class.disabled]="config.paginado.page === 1">
+            <li tabindex="0" (keyup.enter)="goToPage(config.paginado.page - 1)"
+                (keydown.space)="goToPage(config.paginado.page - 1)" [class.disabled]="config.paginado.page === 1">
                 <span *ngIf="config.paginado.page === 1" class="current prev">&lt;</span>
                 <a (click)="goToPage(config.paginado.page - 1)" *ngIf="config.paginado.page > 1"
                     class="page-link next handy">&lt;</a>
             </li>
             <ng-container *ngFor="let p of getPages(); let i = index">
-                <li *ngIf="(config.paginado.page - PAGINADO_MAX) <= i && (config.paginado.page + PAGINADO_MAX) > (i + 1)">
+                <li tabindex="0" (keyup.enter)="goToPage(p)" (keydown.space)="goToPage(p)"
+                    *ngIf="(config.paginado.page - PAGINADO_MAX) <= i && (config.paginado.page + PAGINADO_MAX) > (i + 1)">
                     <span *ngIf="p === config.paginado.page" class="current">{{p}}</span>
                     <a (click)="goToPage(p)" *ngIf="p !== config.paginado.page" class="page-link handy">{{p}}</a>
                 </li>
             </ng-container>
-            <li [class.disabled]="config.paginado.page === getPages().length">
+            <li tabindex="0" (keyup.enter)="goToPage(config.paginado.page + 1)"
+                (keydown.space)="goToPage(config.paginado.page + 1)"
+                [class.disabled]="config.paginado.page === getPages().length">
                 <span *ngIf="config.paginado.page === getPages().length" class="current prev">&gt;</span>
                 <a (click)="goToPage(config.paginado.page + 1)" *ngIf="config.paginado.page < getPages().length"
                     class="page-link next handy">&gt;</a>
